@@ -1,0 +1,55 @@
+{
+  "name": "gulp-indexpipe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "gulp-util": "latest",
+    "through2": "latest",
+    "gulp-rev": "latest"
+  },
+  "devDependencies": {
+    "event-stream": "latest",
+    "gulp": "latest",
+    "gulp-jshint": "latest",
+    "gulp-mocha": "latest",
+    "gulp-util": "latest",
+    "gulp-uglify": "latest",
+    "gulp-minify-html": "latest",
+    "gulp-minify-css": "latest"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nullsoldier/gulp-indexpipe.git"
+  },
+  "keywords": [
+    "gulpplugin",
+    "indexpipe"
+  ],
+  "author": {
+    "name": "Jason S",
+    "email": "nullprogrammer@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nullsoldier/gulp-indexpipe/issues"
+  },
+  "engines": {
+    "node": ">=0.8"
+  },
+  "homepage": "https://github.com/pursual/gulp-indexpipe",
+  "dist": {
+    "shasum": "ce1aca12ae59c885893a2a8b28a79ecf198bc4cf",
+    "tarball": "http://registry.npmjs.org/gulp-usemin2/-/gulp-usemin2-0.2.4.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "pursual",
+      "email": "pursual@gmail.com"
+    }
+  ],
+  "directories": {},
+}
