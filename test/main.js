@@ -34,8 +34,8 @@ function getExpected(filePath) {
 function compare(actualName, expectedName, args, done) {
 
   function onData(file) {
-    if (path.basename(file.path) !== expectedName)
-      throw('File emitted that was not expected index');
+    if (path.basename(file.path) !== actualName)
+      throw('Wrong file emitted: ' + file.path + ' !== ' + actualName);
 
     var expectedContent = String(getExpected(expectedName).contents);
     var actualContent   = String(file.contents);
@@ -57,7 +57,7 @@ describe('gulp-indexpipe', function() {
 
   it('section identity', function(done) {
     var args = {
-      jsmin: new PassThrough()
+      jsmin: new PassThrough({objectMode: true})
     };
 
     compare('simple-identity.html', 'simple-identity.html', args, done);
