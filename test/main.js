@@ -4,7 +4,6 @@
 'use strict';
 
 var assert      = require('assert');
-var es          = require('event-stream');
 var fs          = require('fs');
 var gutil       = require('gulp-util');
 var PassThrough = require('stream').PassThrough;
