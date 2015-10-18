@@ -80,4 +80,12 @@ describe('gulp-indexpipe', function() {
 
     compare('simple-transform.html', 'simple-transform.html', args, done);
   });
+
+  it('section identity', function(done) {
+    var args = {
+      jsmin: new PassThrough({ objectMode: true })
+    };
+
+    compare('simple-alternate.html', 'simple-identity.html', args, done);
+  });
 });
