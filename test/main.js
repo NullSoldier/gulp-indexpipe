@@ -64,17 +64,17 @@ describe('gulp-indexpipe', function() {
   });
 
   it('section transform', function(done) {
-    var reduced = false
+    var reduced = false;
     var args = {
       scripts: through.obj(function (file, enc, callback) {
         if(reduced)
-          return
+          return;
         this.push(new gutil.File({
           path    : 'app.js',
           contents: ''
         }));
         callback();
-        reduced = true
+        reduced = true;
       })
     };
 
