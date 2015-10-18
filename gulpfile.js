@@ -2,9 +2,9 @@
 
 'use strict';
 
-var gulp = require('gulp');
+var gulp   = require('gulp');
 var jshint = require('gulp-jshint');
-var mocha = require('gulp-mocha');
+var mocha  = require('gulp-mocha');
 
 gulp.task('lint', function() {
   return gulp.src('test/main.js')
