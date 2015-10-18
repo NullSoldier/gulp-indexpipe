@@ -57,7 +57,7 @@ describe('gulp-indexpipe', function() {
 
   it('section identity', function(done) {
     var args = {
-      jsmin: new PassThrough({objectMode: true})
+      scripts: new PassThrough({objectMode: true})
     };
 
     compare('simple-identity.html', 'simple-identity.html', args, done);
@@ -66,7 +66,7 @@ describe('gulp-indexpipe', function() {
   it('section transform', function(done) {
     var reduced = false
     var args = {
-      jsmin: through.obj(function (file, enc, callback) {
+      scripts: through.obj(function (file, enc, callback) {
         if(reduced)
           return
         this.push(new gutil.File({
@@ -83,7 +83,7 @@ describe('gulp-indexpipe', function() {
 
   it('section identity', function(done) {
     var args = {
-      jsmin: new PassThrough({ objectMode: true })
+      scripts: new PassThrough({ objectMode: true })
     };
 
     compare('simple-alternate.html', 'simple-identity.html', args, done);

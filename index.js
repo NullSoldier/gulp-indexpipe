@@ -7,7 +7,7 @@ var gutil = require('gulp-util');
 var rev = require('gulp-rev');
 
 module.exports = function (options) {
-  options = options || {}; // cssmin, htmlmin, jsmin
+  options = options || {};
 
   var SECTION_START_REGEX = /<!--\s*build:(css|js)(?:\(([^\)]+?)\))?\s+(\/?([^\s]+?))\s*-->/gim;
   var SECTION_END_REGEX   = /<!--\s*endbuild\s*-->/gim;
@@ -21,6 +21,7 @@ module.exports = function (options) {
 
   function createSection(section) {
     return {
+      name         : section[4], // NEW
       original     : section[0], // ? always empty?
       fileType     : section[1], // x
       alternatePath: section[2], // x
@@ -52,18 +53,20 @@ module.exports = function (options) {
 
   function transformSectionRefs(section, sectionRefs) {
     finalRefs = []
+    processor = options[section.name]
 
-    function onFinalRef(file) {
-      finalRefs.push(file)
+    if (processor) {
+      function onFinalRef(file) {
+        finalRefs.push(file)
+      }
+
+      processor.on('data', onFinalRef)
+      sectionRefs.forEach(function(file) {
+        processor.write(file);
+      })
+      processor.removeListener('on', onFinalRef)
     }
 
-    options.jsmin.on('data', onFinalRef)
-
-    sectionRefs.forEach(function(file) {
-      options.jsmin.write(file);
-    })
-
-    options.jsmin.removeListener('on', onFinalRef)
     return finalRefs
   }
 
