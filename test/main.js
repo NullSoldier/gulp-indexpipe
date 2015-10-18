@@ -88,4 +88,13 @@ describe('gulp-indexpipe', function() {
 
     compare('simple-alternate.html', 'simple-identity.html', args, done);
   });
+
+  it('section identity', function(done) {
+    var args = {
+      one: new PassThrough({ objectMode: true }),
+      two: new PassThrough({ objectMode: true })
+    };
+
+    compare('simple-multiple.html', 'simple-multiple.html', args, done);
+  });
 });
