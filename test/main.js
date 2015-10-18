@@ -60,7 +60,7 @@ describe('gulp-indexpipe', function() {
       scripts: new PassThrough({objectMode: true})
     };
 
-    compare('simple-identity.html', 'simple-identity.html', args, done);
+    compare('identity.html', 'identity.html', args, done);
   });
 
   it('section transform', function(done) {
@@ -78,7 +78,7 @@ describe('gulp-indexpipe', function() {
       })
     };
 
-    compare('simple-transform.html', 'simple-transform.html', args, done);
+    compare('transform.html', 'transform.html', args, done);
   });
 
   it('section identity', function(done) {
@@ -86,7 +86,7 @@ describe('gulp-indexpipe', function() {
       scripts: new PassThrough({ objectMode: true })
     };
 
-    compare('simple-alternate.html', 'simple-identity.html', args, done);
+    compare('alternate.html', 'identity.html', args, done);
   });
 
   it('section identity', function(done) {
@@ -95,6 +95,6 @@ describe('gulp-indexpipe', function() {
       two: new PassThrough({ objectMode: true })
     };
 
-    compare('simple-multiple.html', 'simple-multiple.html', args, done);
+    compare('multiple.html', 'multiple.html', args, done);
   });
 });
