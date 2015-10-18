@@ -129,8 +129,7 @@ module.exports = function (options) {
       return
     }
 
-    var result = processHtml(file);
-    this.push(result);
+    this.push(processHtml(file));
     callback();
   });
 };
