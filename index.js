@@ -94,10 +94,6 @@ module.exports = function (options) {
       var sectionRefs = getSectionFiles(section, section_regex[section.fileType], state)
       var finalRefs   = transformSectionRefs(section, sectionRefs)
 
-      // console.log('Discovered section: ', section.outName)
-      // console.log('Section files: ', sectionRefs)
-      // console.log('Transformed files: ', finalRefs)
-
       result.push(section.original)
 
       refSource = []
@@ -106,8 +102,6 @@ module.exports = function (options) {
       }
       result.push(refSource.join('\n'))
     }
-
-    // console.log('Final: ', result)
 
     return new gutil.File({
       path    : path.join(path.relative(state.basePath, state.mainPath), state.mainName),
