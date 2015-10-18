@@ -96,11 +96,16 @@ module.exports = function (options) {
 
       result.push(section.original)
 
-      refSource = []
+      refSources = []
       for (var l = 0; l < finalRefs.length; l++) {
-        refSource.push('<script src="' + finalRefs[l].path + '"></script>');
+        if(section.fileType === 'js') {
+          refSources.push('<script src="' + finalRefs[l].path + '"></script>');
+        }
+        if(section.fileType === 'css') {
+          refSources.push('<link rel="stylesheet" href="' + finalRefs[l].path + '"/>');
+        }
       }
-      result.push(refSource.join('\n'))
+      result.push(refSources.join('\n'));
     }
 
     return new gutil.File({

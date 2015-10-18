@@ -15,6 +15,21 @@ var jsmin   = require('gulp-uglify');
 var htmlmin = require('gulp-minify-html');
 var cssmin  = require('gulp-minify-css');
 
+function onceStream(output) {
+  var reduced = false;
+  return through.obj(function (file, enc, callback) {
+    if(reduced)
+      return;
+    this.push(output);
+    callback();
+    reduced = true;
+  });
+}
+
+function onceFileStream(path) {
+  return onceStream(new gutil.File({path: path, contents: ''}));
+}
+
 function getFile(filePath) {
   return new gutil.File({
     path:     filePath,
@@ -55,35 +70,28 @@ function compare(actualName, expectedName, args, done) {
 
 describe('gulp-indexpipe', function() {
 
-  it('section identity', function(done) {
+  it('should pass identity transform paths', function(done) {
     var args = {
-      scripts: new PassThrough({objectMode: true})
+      scripts: new PassThrough({objectMode: true}),
+      styles : new PassThrough({objectMode: true})
     };
 
     compare('identity.html', 'identity.html', args, done);
   });
 
-  it('section transform', function(done) {
-    var reduced = false;
+  it('should reduce paths', function(done) {
     var args = {
-      scripts: through.obj(function (file, enc, callback) {
-        if(reduced)
-          return;
-        this.push(new gutil.File({
-          path    : 'app.js',
-          contents: ''
-        }));
-        callback();
-        reduced = true;
-      })
+      scripts: onceFileStream('app.js'),
+      styles : onceFileStream('vendor.css')
     };
 
     compare('transform.html', 'transform.html', args, done);
   });
 
-  it('section identity', function(done) {
+  it('should use alternate paths', function(done) {
     var args = {
-      scripts: new PassThrough({ objectMode: true })
+      scripts: new PassThrough({objectMode: true}),
+      styles : new PassThrough({objectMode: true})
     };
 
     compare('alternate.html', 'identity.html', args, done);
