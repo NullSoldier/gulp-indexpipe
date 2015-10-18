@@ -100,9 +100,11 @@ module.exports = function (options) {
 
       result.push(section.original)
 
+      refSource = []
       for (var l = 0; l < finalRefs.length; l++) {
-        result.push('<script src="' + finalRefs[l].path + '"></script>' + EOL);
+        refSource.push('<script src="' + finalRefs[l].path + '"></script>');
       }
+      result.push(refSource.join('\n'))
     }
 
     // console.log('Final: ', result)
