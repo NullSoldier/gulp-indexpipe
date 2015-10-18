@@ -30,50 +30,6 @@ module.exports = function (options) {
     }
   }
 
-  // function createFile(name, content, asset) {
-  //  var filepath = path.join(path.relative(basePath, mainPath), name)
-
-  //  if (asset === true && options.assetsDir)
-  //  {
-  //    filepath = path.relative(basePath,path.join(options.assetsDir,filepath));
-  //  }
-
-  //  return new gutil.File({
-  //    path: filepath,
-  //    contents: new Buffer(content)
-  //  });
-  // }
-
-  // function concat(content, reg, delimiter) {
-  //  var paths = [];
-  //  var buffer = [];
-
-  //  content
-  //    .replace(/<!--(?:(?:.|\r|\n)*?)-->/gim, '')
-  //    .replace(reg, function (a, b) {
-  //      paths.push(path.resolve(path.join(alternatePath || mainPath, b)));
-  //    });
-
-  //  for (var i = 0, l = paths.length; i < l; ++i)
-  //    buffer.push(fs.readFileSync(paths[i]));
-
-  //  return buffer.join(delimiter);
-  // }
-
-  // function write(files, processor, callback) {
-  //  if (processor) {
-  //    processor.on('data', callback);
-
-  //    files.forEach(function(file) {
-  //      processor.write(file);
-  //    });
-
-  //    processor.removeListener('data', callback);
-  //  }
-  //  else
-  //    files.forEach(callback);
-  // }
-
   function getSectionFiles(section, reg, state) {
     var files = [];
 
