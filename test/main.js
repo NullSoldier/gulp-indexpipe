@@ -7,6 +7,7 @@ var assert      = require('assert');
 var fs          = require('fs');
 var gutil       = require('gulp-util');
 var PassThrough = require('stream').PassThrough;
+var Duplex      = require('stream').Duplex;
 var through     = require('through2');
 var path        = require('path');
 var indexpipe   = require('../index');
@@ -15,15 +16,22 @@ var jsmin   = require('gulp-uglify');
 var htmlmin = require('gulp-minify-html');
 var cssmin  = require('gulp-minify-css');
 
-function onceStream(output) {
-  var reduced = false;
+function asyncStream() {
   return through.obj(function (file, enc, callback) {
-    if(reduced)
-      return;
-    this.push(output);
-    callback();
-    reduced = true;
+    process.nextTick(function() {
+      this.push(file);
+      callback()
+    }.bind(this))
   });
+}
+
+function onceStream(output) {
+  var stream =  through.obj(function (file, enc, callback) { callback() });
+  stream.once('finish', function() {
+    stream.emit('data', output);
+    this.end();
+  })
+  return stream
 }
 
 function onceFileStream(path) {
@@ -70,6 +78,15 @@ function compare(actualName, expectedName, args, done) {
 
 describe('gulp-indexpipe', function() {
 
+  it('should wait for async transforms', function(done) {
+    var args = {
+      scripts: asyncStream(),
+      styles : asyncStream(),
+    };
+
+    compare('identity.html', 'identity.html', args, done);
+  });
+
   it('should pass identity transform paths', function(done) {
     var args = {
       scripts: new PassThrough({objectMode: true}),
@@ -97,7 +114,7 @@ describe('gulp-indexpipe', function() {
     compare('alternate.html', 'identity.html', args, done);
   });
 
-  it('section identity', function(done) {
+  it('should process multiple blocks of the same type', function(done) {
     var args = {
       one: new PassThrough({ objectMode: true }),
       two: new PassThrough({ objectMode: true })

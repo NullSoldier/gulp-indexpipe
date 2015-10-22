@@ -9,14 +9,15 @@
     "gulp-rev": "latest"
   },
   "devDependencies": {
+    "async": "^1.4.2",
     "event-stream": "latest",
     "gulp": "latest",
     "gulp-jshint": "latest",
-    "gulp-mocha": "latest",
-    "gulp-util": "latest",
-    "gulp-uglify": "latest",
+    "gulp-minify-css": "latest",
     "gulp-minify-html": "latest",
-    "gulp-minify-css": "latest"
+    "gulp-mocha": "latest",
+    "gulp-uglify": "latest",
+    "gulp-util": "latest"
   },
   "scripts": {
     "test": "mocha"
