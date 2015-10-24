@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "async": "latest",
     "gulp-util": "latest",
-    "through2": "latest",
-    "gulp-rev": "latest"
+    "through2": "latest"
   },
+
   "devDependencies": {
     "async": "^1.4.2",
     "event-stream": "latest",
@@ -16,8 +17,7 @@
     "gulp-minify-css": "latest",
     "gulp-minify-html": "latest",
     "gulp-mocha": "latest",
-    "gulp-uglify": "latest",
-    "gulp-util": "latest"
+    "gulp-uglify": "latest"
   },
   "scripts": {
     "test": "mocha"

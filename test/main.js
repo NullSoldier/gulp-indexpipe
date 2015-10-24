@@ -20,18 +20,18 @@ function asyncStream() {
   return through.obj(function (file, enc, callback) {
     process.nextTick(function() {
       this.push(file);
-      callback()
-    }.bind(this))
+      callback();
+    }.bind(this));
   });
 }
 
 function onceStream(output) {
-  var stream =  through.obj(function (file, enc, callback) { callback() });
+  var stream =  through.obj(function (file, enc, callback) { callback(); });
   stream.once('finish', function() {
     stream.emit('data', output);
     this.end();
-  })
-  return stream
+  });
+  return stream;
 }
 
 function onceFileStream(path) {
