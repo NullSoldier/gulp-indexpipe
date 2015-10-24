@@ -44,12 +44,12 @@ module.exports = function (options) {
 
   function fileToRef(file) {
     if(file.path.endsWith('.js')) {
-      return '<script src="' + file.path + '"></script>';
+      return '<script src="' + file.relative + '"></script>';
     }
     else if(file.path.endsWith('.css')) {
-      return '<link rel="stylesheet" href="' + file.path + '"/>';
+      return '<link rel="stylesheet" href="' + file.relative + '"/>';
     }
-    throw 'File type not supported for ' + file.path
+    throw 'File type not supported for ' + file.relative
   }
 
   function parseSectionFiles(section, reg, pathInfo) {
